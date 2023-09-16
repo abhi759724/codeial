@@ -1,0 +1,3 @@
+<footer>
+    file footer
+</footer>
