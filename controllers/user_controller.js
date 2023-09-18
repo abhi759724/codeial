@@ -1,3 +1,4 @@
+const user = require("../models/user");
 module.exports.user = (req, res) => {
   res.render("user_Profile", {
     title: "Profile",
@@ -21,6 +22,30 @@ module.exports.signin = (req, res) => {
 
 // get data from user
 
-module.exports.create = (req, res) => {
+module.exports.create = async (req, res) => {
+  console.log(req.body);
+  user
+    .create({
+      email: req.body.email,
+      password: req.body.password,
+      name: req.body.name,
+    })
+    .then(() => {
+      res
+        .status(200)
+        .json({
+          success: true,
+          data: response,
+          message: "Successfull created data",
+        })
+        .catch(() => {
+          res.status(500).json({
+            success: false,
+            message: "Internal Error",
+          });
+        });
+    });
+};
+module.exports.createSession = (req, res) => {
   // later
 };
