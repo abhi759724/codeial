@@ -2,6 +2,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const PORT = 9000;
 const app = express();
+
+// require database
 const db = require("./config/database");
 
 // middelwares
@@ -25,8 +27,7 @@ app.set("views", "./views");
 
 // import routes
 
-app.use("/user", require("./routes/user"));
-app.use("/", require("./routes/index"));
+app.use("/", require("./routes"));
 
 // listen the application
 app.listen(PORT, (req, res) => {
