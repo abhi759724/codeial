@@ -1,20 +1,20 @@
 const User = require("../models/user");
 
 module.exports.userProfile = async (req, res) => {
-  try {
-    if (req.cookies.user_id) {
-      const user = await User.findById(req.cookies.user_id);
-      if (user) {
-        return res.render("user_Profile", {
-          title: "User Profile",
-          user: user,
-        });
-      }
-      return res.redirect("/users/signin");
-    }
-  } catch (err) {
-    console.error(`Error in getting the profile ${err}`);
-  }
+  // try {
+  //   if (req.cookies.user_id) {
+  //     const user = await User.findById(req.cookies.user_id);
+  //     if (user) {
+  //       return res.render("user_Profile", {
+  //         title: "User Profile",
+  //         user: user,
+  //       });
+  //     }
+  //     return res.redirect("/users/signin");
+  //   }
+  // } catch (err) {
+  //   console.error(`Error in getting the profile ${err}`);
+  // }
 };
 
 // render the sign up page
@@ -71,18 +71,17 @@ module.exports.create = async (req, res) => {
   }
 };
 module.exports.createSession = async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
-
-    if (user) {
-      if (user.password != req.body.password) {
-        return res.redirect("back");
-      }
-      res.cookie("user_id", user.id);
-      return res.redirect("/users/profile");
-    }
-  } catch (err) {
-    console.error("Error in creating user while signing up:", err);
-    res.status(500).json({ error: "An error occurred while signing up" });
-  }
+  // try {
+  //   const user = await User.findOne({ email: req.body.email });
+  //   if (user) {
+  //     if (user.password != req.body.password) {
+  //       return res.redirect("back");
+  //     }
+  //     res.cookie("user_id", user.id);
+  //     return res.redirect("/users/profile");
+  //   }
+  // } catch (err) {
+  //   console.error("Error in creating user while signing up:", err);
+  //   res.status(500).json({ error: "An error occurred while signing up" });
+  // }
 };
