@@ -13,11 +13,25 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-stretegy");
 const MongoStore = require("connect-mongo");
 
+// create sass middleware instance
+
+const sassMiddleware = require("node-sass-middleware");
+
 // middelwares
 
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static("./assets"));
+
+// sass middleware to convert sass into css
+app.use(
+  sassMiddleware({
+    src: "./assets/scss",
+    dest: "./assets/css",
+    debug: true,
+    outputStyle: "extended",
+  })
+);
 
 // layout instance
 
