@@ -25,20 +25,6 @@ module.exports.signup = (req, res) => {
   });
 };
 
-// If user is in sign in page and want to register
-module.exports.register = (req, res) => {
-  return res.render("user_signup", {
-    title: "Codeial | sign up",
-  });
-};
-
-// logout
-module.exports.logout = (req, res) => {
-  res.render("user_signin", {
-    title: "Codeial | sign in",
-  });
-};
-
 // render the sign in page
 module.exports.signin = (req, res) => {
   return res.render("user_signin", {
