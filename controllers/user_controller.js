@@ -1,25 +1,17 @@
 const User = require("../models/user");
 
 module.exports.userProfile = async (req, res) => {
-  // try {
-  //   if (req.cookies.user_id) {
-  //     const user = await User.findById(req.cookies.user_id);
-  //     if (user) {
-  //       return res.render("user_Profile", {
-  //         title: "User Profile",
-  //         user: user,
-  //       });
-  //     }
-  //     return res.redirect("/users/signin");
-  //   }
-  // } catch (err) {
-  //   console.error(`Error in getting the profile ${err}`);
-  // }
+  return res.render("user_profile", {
+    title: "User Profile",
+  });
 };
 
 // render the sign up page
 
 module.exports.signup = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("user_signup", {
     title: "Codeial | sign up",
   });
@@ -33,14 +25,17 @@ module.exports.register = (req, res) => {
 };
 
 // logout
-module.exports.logout = (req, res) => {
-  res.render("user_signin", {
-    title: "Codeial | sign in",
+module.exports.signout = (req, res) => {
+  return req.logout(() => {
+    return res.redirect("/");
   });
 };
 
 // render the sign in page
 module.exports.signin = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("user_signin", {
     title: "Codeial | sign in",
   });
@@ -84,4 +79,5 @@ module.exports.createSession = async (req, res) => {
   //   console.error("Error in creating user while signing up:", err);
   //   res.status(500).json({ error: "An error occurred while signing up" });
   // }
+  return res.redirect("/");
 };

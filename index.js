@@ -1,20 +1,26 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const PORT = 9000;
+const expressLayout = require("express-ejs-layouts");
 const app = express();
 
 // require database
 const db = require("./config/database");
 
+// require express session and passport instance
+const session = require("express-session");
+const passport = require("passport");
+const passportLocal = require("./config/passport-local-stretegy");
+const MongoStore = require("connect-mongo");
+
 // middelwares
 
-app.use(express.static("./assets"));
 app.use(express.urlencoded());
 app.use(cookieParser());
+app.use(express.static("./assets"));
 
 // layout instance
 
-const expressLayout = require("express-ejs-layouts");
 app.use(expressLayout);
 
 // extract styles and scripts from sub layouts to layout
@@ -25,6 +31,32 @@ app.set("layout extractScripts", true);
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+// use sessions for tracking logins
+app.use(
+  session({
+    name: "codeial",
+    secret: "helloworld",
+    saveUninitialized: false,
+    resave: false,
+    cookies: {
+      maxAge: 1000 * 60 * 100,
+    },
+    store: MongoStore.create(
+      {
+        mongoUrl: "mongodb://127.0.0.1:27017/codeial_development",
+        autoRemove: "disabled",
+      },
+      function (err) {
+        console.log(err);
+      }
+    ),
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 // import routes
 
 app.use("/", require("./routes"));
