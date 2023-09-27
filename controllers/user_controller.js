@@ -66,18 +66,5 @@ module.exports.create = async (req, res) => {
   }
 };
 module.exports.createSession = async (req, res) => {
-  // try {
-  //   const user = await User.findOne({ email: req.body.email });
-  //   if (user) {
-  //     if (user.password != req.body.password) {
-  //       return res.redirect("back");
-  //     }
-  //     res.cookie("user_id", user.id);
-  //     return res.redirect("/users/profile");
-  //   }
-  // } catch (err) {
-  //   console.error("Error in creating user while signing up:", err);
-  //   res.status(500).json({ error: "An error occurred while signing up" });
-  // }
   return res.redirect("/");
 };
