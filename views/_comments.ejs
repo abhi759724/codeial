@@ -1,0 +1,11 @@
+<p>
+
+    <%= comment.content %>
+        <small>
+            <a href="/comments/destroy/<%=comment._id%>"><i class="fas fa-trash"></i></a>
+        </small>
+        <br>
+        <small>
+            <%= "by-" +comment.user.name %>
+        </small>
+</p>

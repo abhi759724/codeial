@@ -12,45 +12,6 @@
 </section>
 <section id="feed-posts-lists">
     <ul>
-        <% for(let post of posts){ %>
-            <li>
-                <p>
-                    <%= post.content %>
-                        <small>
-                            <a href="/posts/destroy/<%=post._id%>"><i class="fas fa-trash"></i></i></a>
-                        </small>
-                        <br>
-                        <small>
-                            <%= post.user.name %>
-                        </small>
-
-                </p>
-                <div class="posts-comments">
-                    <% if(locals.user){ %>
-                        <form action="/comments/create" method="post">
-                            <input type="text" name="content" placeholder="type here to add comment">
-                            <input type="hidden" name="post" value="<%= post._id %>">
-                            <input type="submit" value="Add comment">
-                        </form>
-                        <% } %>
-                            <div class="post-comments-list">
-                                <ul id="post-comments-<%=post._id%>">
-                                    <% for(comment of post.comments){ %>
-                                        <p>
-                                            <small>
-                                                <a href="/comments/destroy/<%=comment._id%>">delete</i></a>
-                                            </small>
-                                            <%= comment.content %>
-                                                <br>
-                                                <small>
-                                                    <%= "by-" +comment.user.name %>
-                                                </small>
-                                        </p>
-                                        <% } %>
-                                </ul>
-                            </div>
-                </div>
-            </li>
-            <% } %>
+        <%- include('_post') %>
     </ul>
 </section>
