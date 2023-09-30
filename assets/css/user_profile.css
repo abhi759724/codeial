@@ -1,2 +1,5 @@
 body {
   background-color: lightblue; }
+
+.container {
+  min-height: 100vh; }

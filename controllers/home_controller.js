@@ -2,7 +2,15 @@ const Post = require("../models/post");
 module.exports.home = async (req, res) => {
   // populate the user i.e it will return the whole object
   try {
-    const posts = await Post.find({}).populate("user").exec();
+    const posts = await Post.find({})
+      .populate("user")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+        },
+      })
+      .exec();
     return res.render("home", {
       title: "HomePage",
       posts: posts,
