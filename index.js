@@ -16,6 +16,12 @@ const MongoStore = require("connect-mongo");
 // create sass middleware instance
 const sassMiddleware = require("node-sass-middleware");
 
+// import flash messages
+const flash = require("connect-flash");
+
+// import custom middlware from config
+const customMiddleware = require("./config/middleware");
+
 // sass middleware to convert sass into css
 app.use(
   sassMiddleware({
@@ -71,6 +77,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
+// use flash
+app.use(flash());
+app.use(customMiddleware.setFlash);
+
 // import routes
 
 app.use("/", require("./routes"));

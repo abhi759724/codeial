@@ -1,0 +1,24 @@
+#home-container {
+  display: flex;
+  height: 100vh;
+  #feed-posts {
+    padding: 10px;
+    width: 70%;
+  }
+  #user-friends {
+    width: 30%;
+    padding: 10px;
+    border-left: 1px solid lightgrey;
+    height: 100%;
+    ul {
+      li {
+        list-style: none;
+        p {
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

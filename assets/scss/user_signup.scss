@@ -1,0 +1,32 @@
+.main-container2 {
+  //   background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  .signup-box {
+    background-color: grey;
+    border-radius: 2%;
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: white;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      input {
+        margin: 10px 50px;
+        padding: 10px;
+        outline: none;
+      }
+      .btn {
+        border-style: none !important ;
+        margin: 30px 50px;
+        cursor: pointer;
+      }
+    }
+  }
+}

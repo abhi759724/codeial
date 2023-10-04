@@ -1,9 +1,32 @@
 const User = require("../models/user");
 
 module.exports.userProfile = async (req, res) => {
-  return res.render("user_profile", {
-    title: "User Profile",
-  });
+  try {
+    const user = await User.findById(req.params.id);
+    // console.log(user.name, user.email);
+    return res.render("user_profile", {
+      title: "User Profile",
+      profile_user: user,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports.update = async (req, res) => {
+  if (req.user.id == req.params.id) {
+    const userId = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (userId) {
+      console.log("Updated");
+    } else {
+      console.log("not updated");
+    }
+    return res.redirect("back");
+  } else {
+    return res.status(401).send("Unauthorised");
+  }
 };
 
 // render the sign up page
@@ -17,16 +40,10 @@ module.exports.signup = (req, res) => {
   });
 };
 
-// If user is in sign in page and want to register
-module.exports.register = (req, res) => {
-  return res.render("user_signup", {
-    title: "Codeial | sign up",
-  });
-};
-
 // logout
 module.exports.signout = (req, res) => {
   return req.logout(() => {
+    req.flash("success", "Logged out successfully");
     return res.redirect("/");
   });
 };
@@ -66,5 +83,6 @@ module.exports.create = async (req, res) => {
   }
 };
 module.exports.createSession = async (req, res) => {
+  req.flash("success", "Logged in Successfully");
   return res.redirect("/");
 };

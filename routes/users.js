@@ -5,13 +5,14 @@ const passport = require("passport");
 const userController = require("../controllers/user_controller");
 
 router.get(
-  "/profile",
+  "/profile/:id",
   passport.checkAuthentication,
   userController.userProfile
 );
+router.post("/update/:id", passport.checkAuthentication, userController.update);
+
 router.get("/signin", userController.signin);
 router.get("/signup", userController.signup);
-router.get("/register", userController.register);
 router.get("/signout", userController.signout);
 router.post("/create", userController.create);
 router.post(
@@ -19,4 +20,5 @@ router.post(
   passport.authenticate("local", { failureRedirect: "/users/signin" }),
   userController.createSession
 );
+
 module.exports = router;
