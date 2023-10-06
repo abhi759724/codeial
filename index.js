@@ -33,11 +33,13 @@ app.use(
   })
 );
 
-// middelwares
-
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static("./assets"));
+
+// make the uplaod path available for browser
+
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // layout instance
 

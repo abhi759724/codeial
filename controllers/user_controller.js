@@ -15,16 +15,27 @@ module.exports.userProfile = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   if (req.user.id == req.params.id) {
-    const userId = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    if (userId) {
-      console.log("Updated");
-    } else {
-      console.log("not updated");
+    try {
+      const user = await User.findById(req.params.id);
+      User.uploadAvatar(req, res, (err) => {
+        if (err) {
+          console.log("Multer Error", err);
+        }
+        user.name = req.body.name;
+        user.email = req.body.email;
+        if (req.file) {
+          // saving the path of the uploaded file into the avatar field in the user
+          user.avatar = User.avatarPath + "/" + req.file.filename;
+        }
+        user.save();
+        return res.redirect("back");
+      });
+    } catch (err) {
+      req.flash("error", err);
+      res.redirect("back");
     }
-    return res.redirect("back");
   } else {
+    req.flash("error", "unauthorised");
     return res.status(401).send("Unauthorised");
   }
 };

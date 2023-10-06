@@ -12,6 +12,7 @@ const createPost = () => {
         // console.log(data);
         let newPost = newPostDom(data.data.post);
         $("#feed-posts-lists>ul").prepend($(newPost));
+        deletePost($("#delete-post-button"), newPost);
       },
       error: (error) => {
         console.log(error.responseText);
@@ -27,7 +28,7 @@ const newPostDom = (post) => {
     <p>
     ${post.content}
             <small>
-                <a class="delete-post-button" href="/posts/destroy/${post._id}"><i class="fas fa-trash"></i></a>
+                <a id="delete-post-button" href="/posts/destroy/${post._id}"><i class="fas fa-trash"></i></a>
             </small>
             <br>
             <small>
@@ -54,5 +55,20 @@ const newPostDom = (post) => {
 
 // method to delete post in DOM
 
-const deletePost = () => {};
+let deletePost = (deleteLink) => {
+  $(deleteLink).click((e) => {
+    e.preventDefault();
+    console.log("HEllo");
+    $.ajax({
+      type: "get",
+      url: $(deleteLink).prop("href"),
+      success: (data) => {
+        $(`#post-${data.data.post._id}`).remove();
+      },
+      error: (error) => {
+        console.log(error.responseText);
+      },
+    });
+  });
+};
 createPost();
