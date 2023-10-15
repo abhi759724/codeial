@@ -2,39 +2,17 @@ const passport = require("passport");
 const User = require("../models/user");
 const LocalStrategy = require("passport-local").Strategy;
 
-// passport.use(
-//   new localStrategy(
-//     {
-//       UsernameField: "email",
-//     },
-//     async function (email, password, done) {
-//       console.log(email, password);
-//       try {
-//         const user = await User.findOne({ email: email });
-//         console.log(user);
-//         if (!user || user.password != password) {
-//           return done(null, false);
-//         }
-//         return done(null, user);
-//       } catch (err) {
-//         console.log("Error in finding the user");
-//         return done(err);
-//       }
-//     }
-//   )
-// );
-
 passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
-      passReqToCallback: true,
+      // passReqToCallback: true,
     },
 
-    async (req, email, password, done) => {
+    async (email, password, done) => {
       const user = await User.findOne({ email: email });
       if (!user || user.password != password) {
-        req.flash("error", "Invalid username/password");
+        // req.flash("error", "Invalid username/password");
         console.log("Invalid username/password");
         return done(null, false);
       }
@@ -64,7 +42,6 @@ passport.checkAuthentication = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-
   // if the user is not signed in
   return res.redirect("/users/signin");
 };
@@ -75,6 +52,6 @@ passport.setAuthenticatedUser = (req, res, next) => {
     // sending this to locals for the views
     res.locals.user = req.user;
   }
-  next();
+  return next();
 };
 module.exports = passport;

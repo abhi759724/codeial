@@ -6,14 +6,16 @@ module.exports.create = async (req, res) => {
     const post = await Post.create({
       content: req.body.content,
       user: req.user._id,
-      comment: req.user.comment,
+      name: req.user.name,
     });
+    console.log(req.user.name);
     if (req.xhr) {
+      // post = await post.populate("user");
       return res.status(200).json({
         data: {
           post: post,
         },
-        message: "Post Created",
+        message: "Post created !",
       });
     }
     req.flash("success", "Post Published!");

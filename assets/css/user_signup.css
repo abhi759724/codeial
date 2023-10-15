@@ -5,12 +5,11 @@
   width: 100vw;
   height: 100vh; }
   .main-container2 .signup-box {
-    background-color: grey;
     border-radius: 2%; }
     .main-container2 .signup-box h1 {
       font-size: 2rem;
       text-align: center;
-      color: white; }
+      color: grey; }
     .main-container2 .signup-box form {
       display: flex;
       flex-direction: column; }
@@ -22,3 +21,12 @@
         border-style: none !important;
         margin: 30px 50px;
         cursor: pointer; }
+      .main-container2 .signup-box form p {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center; }
+      .main-container2 .signup-box form a {
+        text-decoration: none; }
+      .main-container2 .signup-box form .fa-google-plus {
+        color: black; }

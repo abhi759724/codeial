@@ -10,7 +10,9 @@ const db = require("./config/database");
 // require express session and passport instance
 const session = require("express-session");
 const passport = require("passport");
-const passportLocal = require("./config/passport-local-stretegy");
+const passportLocal = require("./config/passport-local-strategy");
+const passportGoogle = require("./config/passport-google-strategy");
+const JWTStrategy = require("./config/passport-jwt-strategy");
 const MongoStore = require("connect-mongo");
 
 // create sass middleware instance

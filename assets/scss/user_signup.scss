@@ -7,12 +7,12 @@
   height: 100vh;
 
   .signup-box {
-    background-color: grey;
+    // background-color: grey;
     border-radius: 2%;
     h1 {
       font-size: 2rem;
       text-align: center;
-      color: white;
+      color: grey;
     }
     form {
       display: flex;
@@ -26,6 +26,19 @@
         border-style: none !important ;
         margin: 30px 50px;
         cursor: pointer;
+      }
+
+      p {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+      a {
+        text-decoration: none;
+      }
+      .fa-google-plus {
+        color: black;
       }
     }
   }

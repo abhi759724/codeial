@@ -98,7 +98,7 @@ module.exports.create = async (req, res) => {
     res.status(500).json({ error: "An error occurred while signing up" });
   }
 };
-module.exports.createSession = async (req, res) => {
+module.exports.createSession = (req, res) => {
   req.flash("success", "Logged in Successfully");
   return res.redirect("/");
 };

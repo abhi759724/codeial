@@ -11,8 +11,7 @@ module.exports.home = async (req, res) => {
         populate: {
           path: "user",
         },
-      })
-      .exec();
+      });
     const users = await User.find({});
     return res.render("home", {
       title: "HomePage",

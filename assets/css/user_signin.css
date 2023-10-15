@@ -5,12 +5,13 @@
   width: 100vw;
   height: 80vh; }
   .main-container .signin-box {
-    background-color: grey;
-    border-radius: 2%; }
+    background-color: #ede9e9;
+    border-radius: 2%;
+    border: 1px solid black; }
     .main-container .signin-box h1 {
       font-size: 2rem;
       text-align: center;
-      color: white; }
+      color: grey; }
     .main-container .signin-box form {
       display: flex;
       flex-direction: column; }
@@ -21,4 +22,14 @@
       .main-container .signin-box form .btn {
         border-style: none !important;
         margin: 30px 50px;
+        background-color: grey;
         cursor: pointer; }
+      .main-container .signin-box form p {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center; }
+      .main-container .signin-box form a {
+        text-decoration: none; }
+      .main-container .signin-box form .fa-google-plus {
+        color: black; }
