@@ -7,7 +7,7 @@ module.exports.create = async function (req, res) {
     const post = await Post.findById(req.body.post);
 
     if (post) {
-      const comment = await Comment.create({
+      let comment = await Comment.create({
         content: req.body.content,
         post: req.body.post,
         user: req.user._id,
@@ -16,24 +16,18 @@ module.exports.create = async function (req, res) {
       post.comments.push(comment);
       await post.save();
 
-      Comment.populate("user", "name")
-        .then((comment) => {
-          // Your code to work with the populated 'comment' object goes here
-        })
-        .catch((error) => {
-          console.error("Error populating 'user' field:", error);
-        });
-
+      comment = await comment.populate("user", "name");
       commentsMailer.newComment(comment);
 
-      // if (req.xhr) {
-      //   return res.status(200).json({
-      //     message: "Comment created successfully!",
-      //     data: {
-      //       comment: comment,
-      //     },
-      //   });
-      // }
+      if (req.xhr) {
+        return res.status(200).json({
+          message: "Comment created successfully!",
+          data: {
+            comment: comment,
+          },
+          message: "comment created",
+        });
+      }
 
       req.flash("success", "Comment published");
 
@@ -48,7 +42,6 @@ module.exports.create = async function (req, res) {
 module.exports.destroy = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);
-
     await comment.deleteOne();
     return res.redirect("back");
   } catch (err) {

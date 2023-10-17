@@ -2,14 +2,29 @@ const nodemailer = require("nodemailer");
 const ejs = require("ejs");
 const path = require("path");
 
+// by etherial
+
+// create fake testing account
+// let transporter = nodemailer.createTransport({
+//   host: "smtp.ethereal.email",
+//   port: 587,
+//   secure: false, // upgrade later with STARTTLS
+//   auth: {
+//     user: "fakeuser@ethereal.email",
+//     pass: "xA123456",
+//   },
+// });
+
+// By Gmail
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smpt.gmail.com",
   port: 587,
   secure: false,
   auth: {
-    user: "abhishek7597pandey.in",
-    pass: "chacha420!@",
+    user: "demo759724@gmail.com",
+    pass: "flhu tucu etwm uuxe",
   },
 });
 
@@ -30,6 +45,6 @@ let renderTemplate = (data, relativePath) => {
 };
 
 module.exports = {
-  Tranporter: transporter,
+  transporter: transporter,
   renderTemplate: renderTemplate,
 };
