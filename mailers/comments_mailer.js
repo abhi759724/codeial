@@ -9,7 +9,7 @@ module.exports.newComment = async (comment) => {
     await nodeMailer.transporter
       .sendMail({
         from: "demo759724@gmail.com",
-        to: comment.user.email,
+        to: "abhishek7597pandey@gmail.com",
         subject: "New comment on your post!",
         text: "comment published",
         html: htmlString,
