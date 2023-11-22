@@ -1,8 +1,6 @@
 const Comment = require("../models/comment");
 const commentsMailer = require("../mailers/comments_mailer");
 const Post = require("../models/post");
-const queue = require("../config/kue");
-const commentsEmailsWorker = require("../workers/comments_email_workers");
 
 module.exports.create = async function (req, res) {
   try {
@@ -19,17 +17,7 @@ module.exports.create = async function (req, res) {
       await post.save();
 
       comment = await comment.populate("user", "name");
-      // commentsMailer.newComment(comment);
-
-      const job = queue.create("emails", comment).save((err) => {
-        if (err) {
-          console.log("error in sending the job in queue", err);
-          return;
-        }
-        if (!err) {
-          console.log(`Job with ID ${job.id} created`);
-        }
-      });
+      commentsMailer.newComment(comment);
 
       if (req.xhr) {
         return res.status(200).json({
@@ -54,8 +42,24 @@ module.exports.create = async function (req, res) {
 module.exports.destroy = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);
-    await comment.deleteOne();
-    return res.redirect("back");
+    if (comment.post) {
+      let postId = comment.post;
+
+      comment.remove();
+      let post = post.findByIdAndUpdate(postId, {
+        $pull: { comments: req.params.id },
+      });
+      await Like.deleteMany({ likeable: comment._id, onModel: "Comment" });
+      if (req.xhr) {
+        return res.status(200).json({
+          data: {
+            comment_id: req.params.id,
+          },
+          message: "Post Deleted",
+        });
+      }
+      req.flash("success", "Comment Deleted:");
+    }
   } catch (err) {
     res.sendStatus(422);
   }

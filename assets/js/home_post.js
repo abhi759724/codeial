@@ -34,6 +34,14 @@ const newPostDom = (post) => {
             <small>
             ${post.user.name}
             </small>
+            <br>
+            <small>
+                            
+                  <a class="toggle-like-button" data-likes="${post.likes.length}" href="/likes/toggle/?id=${post._id}&type=Post">
+                  <i class="fa-regular fa-heart"></i>${post.likes.length}
+                  </a>
+                
+      </small> 
 
     </p>
     <div class="posts-comments">

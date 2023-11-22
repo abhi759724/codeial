@@ -34,12 +34,23 @@
         flex-direction: column;
         justify-content: center;
         text-align: center;
+        border: 1px solid black;
+        width: 40%;
+        margin-left: 30%;
+        border-radius: 10px;
+        height: 20px;
+        background-color: white;
       }
       a {
         text-decoration: none;
+        text-align: center;
       }
       .fa-google-plus {
-        color: black;
+        color: rgb(241, 96, 12);
+      }
+      p:hover {
+        transform: scale(1.2);
+        transition: ease-in-out 0.3s;
       }
     }
   }

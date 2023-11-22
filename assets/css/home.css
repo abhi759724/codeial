@@ -1,15 +1,77 @@
 #home-container {
-  display: flex;
-  height: 100vh; }
+  display: flex; }
+  #home-container #profileImage {
+    width: 50;
+    height: 50;
+    border-radius: 50%; }
   #home-container #feed-posts {
     padding: 10px;
-    width: 70%; }
+    width: 50%; }
   #home-container #user-friends {
-    width: 30%;
+    width: 20%;
     padding: 10px;
     border-left: 1px solid lightgrey;
-    height: 100%; }
-    #home-container #user-friends ul li {
+    height: 100%;
+    color: black; }
+    #home-container #user-friends button {
+      border-radius: 20px;
+      border: none; }
+    #home-container #user-friends button:hover {
+      transform: scale(1.2);
+      transition: ease-in-out 0.2s; }
+    #home-container #user-friends h3 {
+      text-align: center; }
+    #home-container #user-friends ul {
+      padding: 10px 0 10px 0; }
+      #home-container #user-friends ul li {
+        text-align: start;
+        padding: 20px 10px 10px 10px;
+        margin-top: 10px;
+        list-style: none;
+        display: flex;
+        flex-direction: row; }
+        #home-container #user-friends ul li p a {
+          text-decoration: none;
+          color: black; }
+        #home-container #user-friends ul li .links {
+          padding-left: 15px;
+          display: flex;
+          flex-direction: column; }
+          #home-container #user-friends ul li .links a {
+            text-decoration: none; }
+          #home-container #user-friends ul li .links button {
+            border-radius: 20px;
+            border: none;
+            width: 60px; }
+          #home-container #user-friends ul li .links button:hover {
+            transform: scale(1.2);
+            transition: ease-in-out 0.2s; }
+  #home-container #user-list {
+    padding: 10px;
+    margin: 0; }
+    #home-container #user-list ul li {
+      padding: 20px 10px 10px 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: row; }
+      #home-container #user-list ul li .links {
+        padding-left: 15px;
+        display: flex;
+        flex-direction: column; }
+        #home-container #user-list ul li .links a {
+          text-decoration: none; }
+        #home-container #user-list ul li .links button {
+          border-radius: 20px;
+          border: none;
+          width: 100px; }
+        #home-container #user-list ul li .links button:hover {
+          transform: scale(1.2);
+          transition: ease-in-out 0.2s; }
+      #home-container #user-list ul li .add-friend-btn {
+        padding-left: 5px; }
+    #home-container #user-list h3 {
+      text-align: center; }
+    #home-container #user-list li {
+      text-decoration: none;
       list-style: none; }
-      #home-container #user-friends ul li p a {
-        text-decoration: none; }
